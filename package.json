@@ -9,7 +9,13 @@
   "author": "Pat Eason <patrick@pateason.com>",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.0.0-rc.5",
+    "aws-sdk": "^2.3.14",
     "db-migrate": "^0.10.0-beta.12",
-    "db-migrate-mysql": "^1.1.6"
+    "db-migrate-mysql": "^1.1.6",
+    "express": "^4.13.4",
+    "lodash": "^4.13.1",
+    "mysql": "^2.10.2",
+    "squel": "^5.2.1"
   }
 }
