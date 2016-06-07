@@ -17,18 +17,31 @@ module.exports = {
 	buildAPIRoutes: function(model, name){
 		var router = express.Router();
 
+		function capitalize(string){
+			return string.charAt(0).toUpperCase() + string.slice(1);
+		}
+		var Model = global[capitalize(name)];
+
 		/**
 		 * index route
 		 */
 		router.get('/', function(req, res){
-			res.send(name + ' all route');
+			Model.find(
+				null,
+				function(response){
+					res.json(response);
+				});
 		});
 
 		/**
 		 * single route
 		 */
 		router.get('/:id', function(req, res){
-			res.send(name + ' single route: ' + req.params.id);
+			Model.find(
+				req.params.id,
+				function(response){
+					res.json(response);
+				});
 		});
 
 
