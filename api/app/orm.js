@@ -48,6 +48,7 @@ module.exports = {
 					/**
 					 * Get Single ID
 					 */
+					var single_request = true;
 					query.where("id = ?", id);
 				}
 			}
@@ -59,9 +60,14 @@ module.exports = {
 			connection.query(
 				query,
 				function(err, rows, fields){
-					if(err)
+					if(err){
 						throw err;
-					return callback(rows);
+						return callback(null, err);
+					}
+					if(single_request)
+						return callback(rows[0], null);
+					else
+						return callback(rows, null);
 				});
 		}
 	},

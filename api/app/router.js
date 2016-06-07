@@ -39,8 +39,12 @@ module.exports = {
 		router.get('/:id', function(req, res){
 			Model.find(
 				req.params.id,
-				function(response){
-					res.json(response);
+				function(response, error){
+					if(error){
+						res.status(500).send(error);
+					}else{
+						res.json(response);
+					}
 				});
 		});
 
