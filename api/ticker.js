@@ -1,11 +1,15 @@
 /**
  * Import NPM modules
  */
-const mysql     = require('mysql');
-const squel     = require('squel');
-const async     = require('async');
-const _         = require('lodash');
 const express   = require('express');
+
+
+/**
+ * Set globals for utilities
+ */
+global.async = require('async');
+global._ = require('lodash');
+
 
 /**
  * Init ticker application
@@ -24,20 +28,37 @@ module.exports = function(params){
 	 * Import custom modules
 	 */
 	const app = express();
-	app.get('/', function (req, res) {
+	app.get('/', function(req, res){
 		res.send('Hello World!');
 	});
 
-	app.listen(Ticker.config.port, function () {
+	app.listen(Ticker.config.port, function(){
 		console.log(`Ticker listening on port ${Ticker.config.port} in ${Ticker.config.mode} mode!`);
 	});
 
+
 	/**
-	 * Init Router
+	 * get models
 	 */
+	var models = require('require-all')({
+		dirname :  __dirname + '/models',
+		//filter  :  /(.+Controller)\.js$/,
+		recursive: false,
+		map     : function(name){
+			return name.replace(/_([a-z])/g, function(m, c){
+				return c.toUpperCase();
+			});
+		}
+	});
 
 
 	/**
-	 * Init ORM
+	 * Build ORM Models
 	 */
+	require(`${__dirname}/app/orm`).init(models);
+
+	/**
+	 * Build Routes
+	 */
+	require(`${__dirname}/app/router`).init(app, models);
 };

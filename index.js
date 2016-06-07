@@ -13,6 +13,6 @@ if(args.env){
 /**
  * Start Ticker
  */
-const Ticker = require('./api/ticker')({
+require('./api/ticker')({
 	env:env
 });
