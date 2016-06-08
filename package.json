@@ -2,6 +2,7 @@
   "name": "ticker",
   "version": "1.0.0",
   "description": "Prettier Project Management",
+  "repository": "https://github.com/CoastalP47/ticker.git",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,6 +20,7 @@
     "squel": "^5.2.1"
   },
   "devDependencies": {
+    "body-parser": "^1.15.1",
     "debug": "^2.2.0",
     "minimist": "^1.2.0",
     "require-all": "^2.0.0"

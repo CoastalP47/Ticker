@@ -52,15 +52,21 @@ module.exports = {
 		/**
 		 * create route
 		 */
-		router.get('/create', function(req, res){
-			res.send(name + ' create route');
+		router.put('/', function(req, res){
+			console.log(req.body);
+			Model.create(
+				req.body,
+				function(response){
+					res.json(response);
+				});
 		});
 
 
 		/**
 		 * update route
 		 */
-		router.get('/:id/update', function(req, res){
+		router.post('/:id', function(req, res){
+			console.log(req.body);
 			res.send(name + ' update route: ' + req.params.id);
 		});
 
@@ -68,7 +74,8 @@ module.exports = {
 		/**
 		 * delete route
 		 */
-		router.get('/:id/delete', function(req, res){
+		router.delete('/:id', function(req, res){
+			console.log(req.params.id);
 			res.send(name + ' delete route: ' + req.params.id);
 		});
 
