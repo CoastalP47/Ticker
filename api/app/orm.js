@@ -65,9 +65,21 @@ module.exports = {
 				});
 		}
 	},
-	create: function(model, callback){
-		return function(params){
+	create: function(model){
+		return function(params, callback){
+			var query = squel.insert();
+			query.into(model._table);
+			query.setFields(params);
+			query = query.toString();
 
+			connection.query(
+				query,
+				function(err, result){
+					if(err)
+						throw err;
+					return callback(result);
+				}
+			)
 		}
 	},
 	update: function(model, callback){

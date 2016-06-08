@@ -2,7 +2,7 @@
  * Import NPM modules
  */
 const express   = require('express');
-
+const bodyParser = require('body-parser');
 
 /**
  * Set globals for utilities
@@ -21,13 +21,15 @@ module.exports = function(params){
 	Ticker.config    = require('./config/config')[params.env];
 	Ticker.database  = require('./config/database')[params.env];
 
-	console.log(Ticker);
-
 
 	/**
 	 * Import custom modules
 	 */
 	const app = express();
+	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({
+		extended: true
+	}));
 	app.get('/', function(req, res){
 		res.send('Hello World!');
 	});
