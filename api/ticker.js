@@ -30,6 +30,15 @@ module.exports = function(params){
 	app.use(bodyParser.urlencoded({
 		extended: true
 	}));
+
+
+	/**
+	 * express middleware
+	 */
+	const authenticator = require('./app/authenticator');
+	app.use(authenticator);
+
+
 	app.get('/', function(req, res){
 		res.send('Hello World!');
 	});

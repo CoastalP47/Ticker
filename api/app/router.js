@@ -52,7 +52,7 @@ module.exports = {
 		/**
 		 * create route
 		 */
-		router.put('/', function(req, res){
+		router.post('/', function(req, res){
 			console.log(req.body);
 			Model.create(
 				req.body,
@@ -65,7 +65,7 @@ module.exports = {
 		/**
 		 * update route
 		 */
-		router.post('/:id', function(req, res){
+		router.put('/:id', function(req, res){
 			console.log(req.body);
 			res.send(name + ' update route: ' + req.params.id);
 		});
